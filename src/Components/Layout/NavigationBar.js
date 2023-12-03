@@ -15,7 +15,7 @@ export default (props) => {
       <Navbar.Collapse>      
         <Nav>
           <IndexLinkContainer to="/">
-            <NavItem eventKey={1} ><b> NAPLAN School Data </b></NavItem>
+            <NavItem eventKey={1} ><b>School Data</b></NavItem>
           </IndexLinkContainer>   
         </Nav>                            
         <Nav>
