@@ -11,6 +11,7 @@ import GroupChart from './Components/CustomGroups/GroupChart';
 import 'bootstrap/dist/css/bootstrap.css';
 import store from './Redux/Store';
 
+
 const target = document.getElementById('root');
 
 ReactDOM.render((

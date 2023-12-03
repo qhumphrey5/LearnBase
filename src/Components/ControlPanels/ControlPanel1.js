@@ -1,42 +1,43 @@
-import {Grid, Row, Col, ButtonToolbar, DropdownButton, Panel} from 'react-bootstrap';
-import React, {Component} from 'react';
-import TargetList from './TargetList';
-
-// used as dropdown control panel by CustomGroups- renders TargetList with a list of schools
+import React, { Component } from 'react';
+import { Panel, FormControl } from 'react-bootstrap';
 
 export default class ControlPanel1 extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      search: '',
+      schools: []
+    };
+    this.handleSearchChange = this.handleSearchChange.bind(this);
+  }
 
-  constructor(props){
-  	super(props);
-    this.handleDataSelect = this.handleDataSelect.bind(this);
-  };
+  handleSearchChange(event) {
+    this.setState({ search: event.target.value }, this.fetchSchools);
+  }
 
-  handleDataSelect(key) {
-  	this.props.selectData(key);	
-  } 
+  async fetchSchools() {
+    if (this.state.search.length > 2) { // Only search if the search string is 3 or more characters
+      const resp = await fetch(`http://localhost:5000/schools/search/${this.state.search}`);
+      const data = await resp.json();
+      this.setState({ schools: data });
+    } else {
+      this.setState({ schools: [] });
+    }
+  }
 
   render() {
-
-  	const list = this.props.list;
-    const title = 'Select School' ;
-  	const items = list.map((target, index)=>{ 
-  		return <TargetList key={target} target={target} selectTarget={this.props.selectTarget}/>
-    })
-
-  	return  (
-  		<Panel header='Select School' bsStyle='warning'>
-  		  <Grid>
-  		    <Row>
-  		      <Col md={4}>
-              <ButtonToolbar>
-                <DropdownButton  bsSize="xsmall" title={title} id="select_target" >
-                  {items}       
-                </DropdownButton>        
-               </ButtonToolbar>
-            </Col>
-				  </Row>
-			  </Grid>
-  		</Panel>
-  	);
+    return (
+      <Panel header='Select School' bsStyle='warning'>
+        <FormControl
+          type="text"
+          value={this.state.search}
+          placeholder="Search for a school"
+          onChange={this.handleSearchChange}
+        />
+        {this.state.schools.map(school => (
+          <p key={school.id}>{school.name}</p> // Replace this with how you want to display the schools
+        ))}
+      </Panel>
+    );
   }
 }

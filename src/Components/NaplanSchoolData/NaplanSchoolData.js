@@ -19,12 +19,19 @@ class NaplanSchoolData extends Component {
 	constructor(props) {
 	  super(props);
 	  this.state = {  
+		schoolName: '',
 	  };
     this.selectData = this.selectData.bind(this);
     this.selectSchool = this.selectSchool.bind(this);		
     this.selectYear = this.selectYear.bind(this);			 
   }
 
+  async componentDidMount() {
+    const resp = await fetch("http://localhost:5000/schools/112011103");
+    const data = await resp.json();
+    this.setState({ schoolName: data.name }); // Assume the school name is in the 'name' property
+  }
+  
   schoolsList = ['School 1', 'School 2'];
   yearList = ['Year 7', 'Year 9'];
 

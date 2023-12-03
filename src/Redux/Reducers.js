@@ -1,5 +1,5 @@
 import {RegionData, SchoolData, StudentData} from '../Data/ChartData';
-import mathjs from 'mathjs';
+import * as math from 'mathjs';
 
 
 //// helper functions
