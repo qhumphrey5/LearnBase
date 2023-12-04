@@ -2,7 +2,7 @@ import express from 'express'
 import cors from 'cors'
 import knex from './knex.js'
 const app = express()
-const port = 5000
+const port = 5001
 app.use(cors())
 
 app.get('/schools/:aun', async (req, res) => {
@@ -14,5 +14,5 @@ app.listen(port, () => {
   console.log(`App listening on port ${port}`)
 })
 
-const express = require('express');
-const cors = require('cors');
+//const express = require('express');
+//const cors = require('cors');

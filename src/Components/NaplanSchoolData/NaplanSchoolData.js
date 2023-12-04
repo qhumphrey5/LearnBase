@@ -27,7 +27,7 @@ class NaplanSchoolData extends Component {
   }
 
   async componentDidMount() {
-    const resp = await fetch("http://localhost:5000/schools/112011103");
+    const resp = await fetch("http://localhost:5001/schools/112011103");
     const data = await resp.json();
     this.setState({ schoolName: data.name }); // Assume the school name is in the 'name' property
   }
